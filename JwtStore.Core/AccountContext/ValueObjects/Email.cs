@@ -6,11 +6,20 @@ namespace JwtStore.Core.AccountContext.ValueObjects;
 
 public partial class Email
 {
+    #region Constantes
     private const string PATTERN = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    #endregion
 
+    #region Propriedades
     public string Address { get; } = string.Empty;
     public string Hash => Address.ToBase64(); 
+    public Verification Verification { get; private set; } = new();
+    #endregion
 
+    public Email()
+    {
+    }
+    
     public Email(string address)
     {
         if (string.IsNullOrEmpty(address))
@@ -25,15 +34,22 @@ public partial class Email
             throw new InvalidEmailException("E-mail inválido");
     }
 
+    #region Implicit Operators
     public static implicit operator string(Email email) => 
         email.ToString();
 
     public static implicit operator Email(string address) =>
         new(address);
+    #endregion
+
+    #region Métodos
+    public void ResendVerification() =>
+        Verification = new();
 
     public override string ToString() => 
         Address.Trim().ToLower();
 
     [GeneratedRegex(PATTERN)]
     private static partial Regex EmailRegex();
+    #endregion
 }

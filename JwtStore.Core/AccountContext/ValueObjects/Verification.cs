@@ -11,6 +11,10 @@ public class Verification : ValueObject
     public TimeOnly? VerifiedAt { get; private set; } = null;
     public bool IsActive => ExpiresAt == null && VerifiedAt != null;
 
+    public Verification()
+    {
+    }
+
     public void Verify(string code)
     {
         if (IsActive)
