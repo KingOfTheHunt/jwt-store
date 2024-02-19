@@ -1,10 +1,11 @@
 using System.Text.RegularExpressions;
-using JwtStore.Core.AccountContext.Exceptions;
+using JwtStore.Core.Contexts.AccountContext.Exceptions;
+using JwtStore.Core.Contexts.SharedContext.ValueObjects;
 using JwtStore.Core.SharedContext.Extensions;
 
-namespace JwtStore.Core.AccountContext.ValueObjects;
+namespace JwtStore.Core.Contexts.AccountContext.ValueObjects;
 
-public partial class Email
+public partial class Email : ValueObject
 {
     #region Constantes
     private const string PATTERN = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";

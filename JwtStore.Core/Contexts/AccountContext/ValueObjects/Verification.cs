@@ -1,8 +1,8 @@
-using JwtStore.Core.AccountContext.Exceptions;
-using JwtStore.Core.SharedContext.ValueObjects;
+using JwtStore.Core.Contexts.AccountContext.Exceptions;
+using JwtStore.Core.Contexts.SharedContext.ValueObjects;
 using JwtStore.Core.Utils;
 
-namespace JwtStore.Core.AccountContext.ValueObjects;
+namespace JwtStore.Core.Contexts.AccountContext.ValueObjects;
 
 public class Verification : ValueObject
 {

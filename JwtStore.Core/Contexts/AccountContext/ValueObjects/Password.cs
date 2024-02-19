@@ -1,9 +1,10 @@
 using System.Security.Cryptography;
-using JwtStore.Core.AccountContext.Exceptions;
+using JwtStore.Core.Contexts.AccountContext.Exceptions;
+using JwtStore.Core.Contexts.SharedContext.ValueObjects;
 
-namespace JwtStore.Core.AccountContext.ValueObjects;
+namespace JwtStore.Core.Contexts.AccountContext.ValueObjects;
 
-public class Password
+public class Password : ValueObject
 {
     private const string VALID_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private const string SPECIAL_CHARS = "!@#$%&*{}[]()";

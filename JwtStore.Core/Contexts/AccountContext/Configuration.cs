@@ -1,4 +1,4 @@
-namespace JwtStore.Core.AccountContext;
+namespace JwtStore.Core.Contexts.AccountContext;
 
 public static class Configuration
 {
