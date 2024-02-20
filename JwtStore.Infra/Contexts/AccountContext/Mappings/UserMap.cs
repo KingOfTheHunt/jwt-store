@@ -11,10 +11,6 @@ public class UserMap : IEntityTypeConfiguration<User>
         builder.ToTable("User");
 
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id)
-            .IsRequired()
-            .UseIdentityColumn()
-            .ValueGeneratedOnAdd();
 
         builder.Property(x => x.Name)
             .IsRequired()

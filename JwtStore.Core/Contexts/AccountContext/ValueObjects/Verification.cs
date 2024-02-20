@@ -6,13 +6,14 @@ namespace JwtStore.Core.Contexts.AccountContext.ValueObjects;
 
 public class Verification : ValueObject
 {
-    public string Code => Guid.NewGuid().ToString("N")[..6].ToUpper();
+    public string Code { get; private set; }
     public TimeOnly? ExpiresAt { get; private set; } = TimeOnlyUtil.UtcNow().AddMinutes(5);
     public TimeOnly? VerifiedAt { get; private set; } = null;
     public bool IsActive => ExpiresAt == null && VerifiedAt != null;
 
     public Verification()
     {
+        Code = Guid.NewGuid().ToString("N")[..6].ToUpper();
     }
 
     public void Verify(string code)

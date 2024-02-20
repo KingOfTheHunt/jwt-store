@@ -11,6 +11,10 @@ public class User : Entity
     public Password Password { get; set; }
     public string Image { get; set; } = string.Empty;
 
+    public User()
+    {
+    }
+
     public User(string name, Email email, Password password)
     {
         Name = name;
