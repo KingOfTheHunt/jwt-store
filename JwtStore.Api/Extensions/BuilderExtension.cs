@@ -1,5 +1,5 @@
 using System.Text;
-using JwtStore.Core.Contexts.AccountContext;
+using JwtStore.Core.Contexts;
 using JwtStore.Infra.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
