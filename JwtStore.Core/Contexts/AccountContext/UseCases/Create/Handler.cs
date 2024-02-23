@@ -2,10 +2,11 @@ using JwtStore.Core.Contexts.AccountContext.Entities;
 using JwtStore.Core.Contexts.AccountContext.Exceptions;
 using JwtStore.Core.Contexts.AccountContext.UseCases.Create.Contracts;
 using JwtStore.Core.Contexts.AccountContext.ValueObjects;
+using MediatR;
 
 namespace JwtStore.Core.Contexts.AccountContext.UseCases.Create;
 
-public class Handler
+public class Handler : IRequestHandler<Request, Response>
 {
     private readonly IRepository _repository;
     private readonly IService _service;
@@ -16,12 +17,12 @@ public class Handler
         _service = service;
     }
 
-    public async Task<Response> Handle(Resquest resquest, CancellationToken cancellationToken)
+    public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
     {
         // 1 - Validar a requisição
         try
         {
-            var res = Specification.Assert(resquest);
+            var res = Specification.Assert(request);
 
             if (res.IsValid == false)
                 return new Response("Requisição inválida", 400, res.Notifications);
@@ -38,9 +39,9 @@ public class Handler
 
         try
         {
-            email = new Email(resquest.Email);
-            password = new Password(resquest.Password);
-            user = new User(resquest.Name, email, password);
+            email = new Email(request.Email);
+            password = new Password(request.Password);
+            user = new User(request.Name, email, password);
         }
         catch (Exception ex)
         {
