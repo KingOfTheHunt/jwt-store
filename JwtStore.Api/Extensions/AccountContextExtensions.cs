@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace JwtStore.Api.Extensions;
 
 public static class AccountContextExtensions
@@ -17,7 +19,21 @@ public static class AccountContextExtensions
         #endregion
     }
 
-    public static void MapAccountContextEndpoints(this WebApplicationBuilder builder)
+    public static void MapAccountContextEndpoints(this WebApplication app)
     {
+        #region Create
+        app.MapPost("api/v1/users", async (
+            JwtStore.Core.Contexts.AccountContext.UseCases.Create.Request request,
+            IRequestHandler<JwtStore.Core.Contexts.AccountContext.UseCases.Create.Request, 
+            JwtStore.Core.Contexts.AccountContext.UseCases.Create.Response> handler) =>  
+        {
+            var result = await handler.Handle(request, new CancellationToken());
+
+            if (result.IsSuccess)
+                return Results.Created($"api/v1/users/{result.Data?.Email}", result);
+            
+            return Results.Json(result, statusCode: result.Status);
+        });
+        #endregion
     }
 }

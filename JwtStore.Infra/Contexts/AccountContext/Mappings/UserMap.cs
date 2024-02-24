@@ -62,7 +62,8 @@ public class UserMap : IEntityTypeConfiguration<User>
             .Property(y => y.Hash)
             .IsRequired()
             .HasColumnName("PasswordHash")
-            .HasColumnType("NVARCHAR");
+            .HasColumnType("NVARCHAR")
+            .HasMaxLength(255);
 
         builder.OwnsOne(x => x.Password)
             .Property(y => y.ResetCode)

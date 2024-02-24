@@ -19,8 +19,8 @@ public static class Configuration
 
     public class EmailConfiguration 
     {
-        public string DefaultEmail { get; set; } = "teste@balta.io";
-        public string DefaultSenderName { get; set; } = "Balta";
+        public string DefaultEmail { get; set; } = string.Empty;
+        public string DefaultSenderName { get; set; } = string.Empty;
     }
 
     public class ConfigurationSecrets 
