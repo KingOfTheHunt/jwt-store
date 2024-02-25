@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate
 {
-    public class Handler : IRequestHandler<UseCases.Authenticate.Resquest, UseCases.Authenticate.Response>
+    public class Handler : IRequestHandler<UseCases.Authenticate.Request, UseCases.Authenticate.Response>
     {
         private readonly IRepository _repository;
 
@@ -13,7 +13,7 @@ namespace JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate
             _repository = repository;
         }
 
-        public async Task<Response> Handle(Resquest request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
             #region Valida requisiçao
             try

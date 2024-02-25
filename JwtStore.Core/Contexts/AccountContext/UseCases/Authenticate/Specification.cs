@@ -5,7 +5,7 @@ namespace JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate;
 
 public static class Specification
 {
-    public static Contract<Notification> Assert(Resquest resquest) =>
+    public static Contract<Notification> Assert(Request resquest) =>
         new Contract<Notification>()
             .Requires()
             .IsLowerThan(resquest.Password.Length, 40, "Password", "A senha deve conter no máximo 40 caracteres.")

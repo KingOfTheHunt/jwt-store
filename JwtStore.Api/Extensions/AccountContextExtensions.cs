@@ -24,6 +24,13 @@ public static class AccountContextExtensions
             JwtStore.Infra.Contexts.AccountContext.UseCases.Authenticate.Repository
         >();
         #endregion
+
+        #region Validate
+        builder.Services.AddScoped<
+            JwtStore.Core.Contexts.AccountContext.UseCases.Validate.Contracts.IRepository,
+            JwtStore.Infra.Contexts.AccountContext.UseCases.Validate.Repository
+        >();
+        #endregion
     }
 
     public static void MapAccountContextEndpoints(this WebApplication app)
@@ -45,15 +52,30 @@ public static class AccountContextExtensions
 
         #region Authenticate
         app.MapPost("api/v1/authenticate", async (
-            JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate.Resquest resquest,
-            IRequestHandler<JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate.Resquest,
+            JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate.Request request,
+            IRequestHandler<JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate.Request,
             JwtStore.Core.Contexts.AccountContext.UseCases.Authenticate.Response> handler) => 
         {
-            var result = await handler.Handle(resquest, new CancellationToken());
+            var result = await handler.Handle(request, new CancellationToken());
 
             if (result.IsSuccess)
                 return Results.Ok(result);
             
+            return Results.Json(result, statusCode: result.Status);
+        });
+        #endregion
+
+        #region Validate
+        app.MapPost("api/v1/validate", async (
+            JwtStore.Core.Contexts.AccountContext.UseCases.Validate.Request request,
+            IRequestHandler<JwtStore.Core.Contexts.AccountContext.UseCases.Validate.Request,
+            JwtStore.Core.Contexts.AccountContext.UseCases.Validate.Response> handler) => 
+        {
+            var result = await handler.Handle(request, new CancellationToken());
+
+            if (result.IsSuccess)
+                return Results.Ok(result);
+
             return Results.Json(result, statusCode: result.Status);
         });
         #endregion
