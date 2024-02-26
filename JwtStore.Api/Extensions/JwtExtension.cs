@@ -14,7 +14,7 @@ public static class JwtExtension
         var handler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(Configuration.Secrets.JwtKey);
         var crendentials = new SigningCredentials(new SymmetricSecurityKey(key), 
-            SecurityAlgorithms.HmacSha256Signature);
+            SecurityAlgorithms.HmacSha256);
         
         var tokenDescriptior = new SecurityTokenDescriptor 
         {

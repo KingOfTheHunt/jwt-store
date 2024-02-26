@@ -10,6 +10,7 @@ public class User : Entity
     public Email Email { get; set; } = null!;
     public Password Password { get; set; } = null!;
     public string Image { get; set; } = string.Empty;
+    public IEnumerable<Role> Roles { get; set; } = Enumerable.Empty<Role>();
 
     public User()
     {
