@@ -5,5 +5,5 @@ namespace JwtStore.Core.Contexts.AccountContext.Entities;
 public class Role : Entity
 {
     public string Name { get; set; } = string.Empty;
-    public IEnumerable<User> Users { get; set; } = Enumerable.Empty<User>();
+    public IList<User> Users { get; set; } = new List<User>();
 }
